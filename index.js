@@ -80,7 +80,7 @@ app.put('/jogos/:id', (req, res) => {
 
 
 // DELETE - JOGOS{ID} - DELETAR PELA ID
-app.delete('jogos/:id', (req, res) => {
+app.delete('/jogos/:id', (req, res) => {
     const id = +req.params.id;
     
     const jogoIndex = jogos.findIndex(jogo => jogo.id === id)
