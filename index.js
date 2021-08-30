@@ -74,9 +74,7 @@ app.put('/jogos/:id', (req, res) => {
 // dentro da const jogo.
     const jogo = jogos.find(jogo => jogo.id === id)
     novoJogo.id = jogo.id
-    jogos[jogoIndex] = novoJogo
-
-    
+    jogos[jogoIndex] = novoJogo   
     res.send({message: "Jogo alterado com sucesso"});
 })
 
@@ -85,13 +83,13 @@ app.put('/jogos/:id', (req, res) => {
 app.delete('jogos/:id', (req, res) => {
     const id = +req.params.id;
     
-    const jogoIndex = jogos.findIndex(jogo => jogo.id === id);
+    const jogoIndex = jogos.findIndex(jogo => jogo.id === id)
     if (jogoIndex < 0){
         res.status(404).send({erro: "Jogo não encontrado."})
         return;
     }
     
-    jogos.splice(jogoIndex)
+    jogos.splice(jogoIndex, 1);
 
     
     res.send({message:'Jogo deletado com sucesso'})
