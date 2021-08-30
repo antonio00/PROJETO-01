@@ -6,8 +6,14 @@ const port = 3000
 
 
 const jogos =[
-    
+    // array vazio
 ]
+
+// função por fazer o getById de jogos;
+const getJogosById = id => jogos.find(jogo => jogo.id === id)
+
+// função responsavel por fazer getByIndex de jogos:
+const getJogoIndexById = id => jogos.findIndex(jogo => jogo.id === id)
 
 // GET / - HOME- BUSCA ROTA HOME
 app.get('/', (req, res) => {
@@ -22,7 +28,7 @@ app.get('/jogos', (req, res) => {
 // GET / JOGOS{id} - RETONAR A LISTA DE JOGOS PELO ID
 app.get('/jogos/:id', (req, res) =>{
     const id = +req.params.id;
-    const jogo = jogos.find(jogo => jogo.id === id)
+    const jogo = getJogosById(id)
 
     !jogo ? res.status(404).send({error:'Jogo não existe'}): res.json({jogo})
 
@@ -56,7 +62,7 @@ app.put('/jogos/:id', (req, res) => {
     const id = +req.params.id;
 // FindIndex retorna a posição do objeto dentro do array(jogos), não existindo
 // retorna -1
-    const jogoIndex = jogos.findIndex(jogo => jogo.id === id)
+    const jogoIndex = getJogoIndexById(id)
 
 // validação para verificar existencia dentro do array.
     if (jogoIndex < 0){
@@ -72,7 +78,7 @@ app.put('/jogos/:id', (req, res) => {
 
 // busca o jogo cadastrado no array pelo id, e insere o objeto inteiro
 // dentro da const jogo.
-    const jogo = jogos.find(jogo => jogo.id === id)
+    const jogo = getJogosById(id)
     novoJogo.id = jogo.id
     jogos[jogoIndex] = novoJogo   
     res.send({message: "Jogo alterado com sucesso"});
@@ -83,7 +89,7 @@ app.put('/jogos/:id', (req, res) => {
 app.delete('/jogos/:id', (req, res) => {
     const id = +req.params.id;
     
-    const jogoIndex = jogos.findIndex(jogo => jogo.id === id)
+    const jogoIndex = getJogoIndexById(id)
     if (jogoIndex < 0){
         res.status(404).send({erro: "Jogo não encontrado."})
         return;
